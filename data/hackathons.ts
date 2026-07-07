@@ -30,7 +30,7 @@ export const hackathons: Hackathon[] = [
     organizer: "Ministry of Jal Shakti, Government of India",
     date: "2025-12",
     year: 2025,
-    teamSize: 3,
+    teamSize: 1,
     myRole: "Founder & Lead Developer",
     problemStatement:
       "Design a scalable geospatial system utilizing GeoAI to optimize urban rooftop rainwater harvesting layouts and predict yields.",
@@ -50,9 +50,9 @@ export const hackathons: Hackathon[] = [
     title: "Eco Champions Project",
     event: "Eco Champions Hackathon",
     organizer: "EPA / Local Innovation Cell",
-    date: "2024-05",
-    year: 2024,
-    teamSize: 4,
+    date: "2026-05",
+    year: 2026,
+    teamSize: 2,
     myRole: "GIS Analyst & Lead Developer",
     problemStatement:
       "Develop innovative geospatial applications targeting regional microclimate variations or ecological conservation.",

@@ -56,7 +56,7 @@ export const certificates: Certificate[] = [
     id: "5",
     title: "NRSC Training: Specialized training on Bhuvan Geoportal and SAR data (NISAR) trends",
     organization: "ISRO Shadnagar / National Remote Sensing Centre (NRSC)",
-    date: "2024",
+    date: "2026",
     category: "Remote Sensing",
     color: "orange",
     skills: ["Bhuvan Geoportal", "SAR Data Processing", "NISAR Trends"],

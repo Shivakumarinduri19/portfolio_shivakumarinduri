@@ -32,7 +32,7 @@ export const achievements: Achievement[] = [
     title: "1st Prize - Eco Champions Hackathon",
     subtitle: "First Place Winner",
     organization: "EPA / Geospatial Academic Alliance",
-    date: "2024",
+    date: "2026",
     type: "Award",
     description:
       "Secured 1st Prize for building an interactive spatial planning map resolving microclimate and forest sustainability indices.",
@@ -70,7 +70,7 @@ export const achievements: Achievement[] = [
     title: "NRSC Training",
     subtitle: "Specialized Training on Bhuvan Geoportal & NISAR SAR Data",
     organization: "ISRO Shadnagar / National Remote Sensing Centre (NRSC)",
-    date: "2024",
+    date: "2026",
     type: "Training",
     description:
       "Completed specialized geospatial and satellite training focusing on the Bhuvan Geoportal and Synthetic Aperture Radar (SAR) data (NISAR) trends at the ISRO Shadnagar facility.",
