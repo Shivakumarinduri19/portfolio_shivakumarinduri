@@ -1,0 +1,62 @@
+export const profile = {
+  name: "Shiva Kumar Induri",
+  title: "Final Year Student at JNTUH",
+  tagline: "GeoAI & Geospatial Data Science | Python • GEE • Computer Vision",
+  bio: `Geoinformatics student with an AI/ML minor, skilled in Python, Google Earth Engine, and remote sensing, focused on sustainable infrastructure and precision agriculture.`,
+  longBio: `I am a Final Year Student at Jawaharlal Nehru Technological University Hyderabad (JNTUH), pursuing a Bachelor of Technology in Geoinformatics with a Minor in Artificial Intelligence and Machine Learning (AIML). 
+
+I specialize in leveraging satellite remote sensing, Google Earth Engine (GEE), and computer vision pipelines to analyze earth observation data. My work focuses on designing sustainable infrastructure solutions and precision agriculture models, transforming complex spatial datasets into actionable decision support systems.`,
+  careerObjective: `Seeking internship or entry-level opportunities in GeoAI, Remote Sensing, and Geospatial Data Science where I can apply my expertise in GEE, machine learning, and spatial analysis to build scalable, data-driven solutions for sustainable resource management.`,
+  researchInterests: [
+    "Geospatial AI (GeoAI)",
+    "Satellite Remote Sensing & GIS Analysis",
+    "Computer Vision & Feature Extraction",
+    "Digital Image Processing",
+    "Precision Agriculture & Crop Health Monitoring",
+    "Sustainable Infrastructure Design",
+    "Hydrological Modeling & Water Resources",
+    "Satellite Systems (CanSat & CubeSat)",
+  ],
+  expertise: [
+    { label: "Remote Sensing & GEE", icon: "Satellite" },
+    { label: "Geospatial Analysis", icon: "Map" },
+    { label: "Computer Vision & AI/ML", icon: "Brain" },
+    { label: "Python & Spatial Libraries", icon: "Code2" },
+    { label: "WebGIS & PostGIS", icon: "Globe2" },
+    { label: "Hydrological Modeling", icon: "Droplets" },
+    { label: "Sustainable Infrastructure", icon: "Building2" },
+    { label: "Drone & Space Systems", icon: "Satellite" },
+  ],
+  contact: {
+    email: "shivakumarinduri19@gmail.com",
+    phone: "+91 6281882426",
+    github: "https://github.com/Shivakumarinduri19",
+    linkedin: "https://www.linkedin.com/in/shiva-kumar-induri-6460293a2",
+    twitter: "",
+    location: "Hyderabad, India",
+  },
+  education: [
+    {
+      degree: "B.Tech in Geoinformatics (Major)",
+      institution: "Jawaharlal Nehru Technological University Hyderabad (JNTUH)",
+      period: "Aug 2024 – May 2027",
+      gpa: "8.53 / 10",
+      description: "Focusing on remote sensing, spatial analysis, digital image processing, and postGIS databases.",
+    },
+    {
+      degree: "AI & Machine Learning (Minor)",
+      institution: "Jawaharlal Nehru Technological University Hyderabad (JNTUH)",
+      period: "2025 – 2027",
+      gpa: "8.0 / 10",
+      description: "Minor specialization targeting neural networks, computer vision, and machine learning workflows.",
+    },
+    {
+      degree: "Diploma in Civil Engineering",
+      institution: "S.G. Govt Polytechnic, Adilabad",
+      period: "June 2021 – April 2024",
+      gpa: "8.77 / 10",
+      description: "Awarded the Meritorious Student Award for academic excellence in Civil Engineering.",
+    },
+  ],
+  resumeUrl: "/resume.pdf",
+};
