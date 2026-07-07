@@ -229,7 +229,7 @@ export default function Hero() {
                 <div className="w-full h-full rounded-full overflow-hidden border-2 border-cyan-400/30 shadow-[0_0_40px_rgba(0,212,255,0.2)] relative">
                   {!imageError ? (
                     <img
-                      src="/images/profile.jpg"
+                      src="/images/profile.jpg?v=2"
                       alt="Shiva Kumar"
                       className="w-full h-full object-cover relative z-10 animate-fade-in"
                       style={{ transform: "scale(2.4)", transformOrigin: "center 38%" }}
