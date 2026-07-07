@@ -29,13 +29,13 @@ export const achievements: Achievement[] = [
   },
   {
     id: "2",
-    title: "1st Prize - Eco Champions Hackathon",
-    subtitle: "First Place Winner",
-    organization: "EPA / Geospatial Academic Alliance",
+    title: "1st Prize — TGPCB Eco Champions",
+    subtitle: "First Place Winner (CampusCircle)",
+    organization: "Telangana State Pollution Control Board (TGPCB)",
     date: "2026",
     type: "Award",
     description:
-      "Secured 1st Prize for building an interactive spatial planning map resolving microclimate and forest sustainability indices.",
+      "Won 1st Prize from the Telangana State Pollution Control Board (TGPCB) for creating CampusCircle, an AI-IoT-enabled waste management system designed for school and university campuses.",
     icon: "Trophy",
     color: "emerald",
     highlight: true,
