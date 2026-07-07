@@ -81,7 +81,7 @@ The analysis confirmed a strong negative correlation between NDVI and LST, provi
     status: "Completed",
     featured: true,
     image: "/images/projects/coolcity.jpg",
-    demoUrl: "#", // Live link placeholder
+    demoUrl: "https://ee-shivakumarinduri19.projects.earthengine.app/view/uhi",
     location: { lat: 17.385, lng: 78.4867, label: "Hyderabad, Telangana" },
     datasets: [
       "Landsat 8/9 OLI-TIRS Thermal Imagery (USGS)",
