@@ -36,7 +36,7 @@ export const certificates: Certificate[] = [
     id: "3",
     title: "Introduction to RS & GIS using QGIS",
     organization: "QGIS Org / Academic Portal",
-    date: "2023",
+    date: "2025",
     category: "GIS",
     color: "cyan",
     skills: ["QGIS", "Remote Sensing", "GIS Analysis"],
