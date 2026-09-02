@@ -17,7 +17,7 @@ export const achievements: Achievement[] = [
   {
     id: "1",
     title: "Jal Shakti Hackathon Award 2025",
-    subtitle: "National Winner — 1st Place & INR 1,00,000 Grant",
+    subtitle: "National Winner —  Recieved INR 1,00,000 Grant",
     organization: "Ministry of Jal Shakti, Government of India",
     date: "2025",
     type: "Award",
