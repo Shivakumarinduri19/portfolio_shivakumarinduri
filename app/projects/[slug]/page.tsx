@@ -249,7 +249,7 @@ export default function ProjectDetail() {
               <ul className="space-y-2 text-xs text-slate-400 leading-relaxed list-disc pl-4">
                 <li>Integrate real-time IoT weather sensors for ground validation.</li>
                 <li>Optimize inference latency for browser-side deep learning classification.</li>
-                <li>Extend geographical coverage to all neighboring Indian states.</li>
+                <li>building robust systems for geospatial foundational models.and real world applications on foundational models in agriculture ,forestry and urban planning </li>
               </ul>
             </GlowCard>
           </div>
