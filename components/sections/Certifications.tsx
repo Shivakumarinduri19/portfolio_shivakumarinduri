@@ -12,10 +12,13 @@ import {
   CheckCircle2,
   Sparkles,
   ShieldCheck,
+  Maximize2,
+  X,
 } from "lucide-react";
 
 export default function Certifications() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [activeImage, setActiveImage] = useState<{ src: string; title: string } | null>(null);
 
   const categories = useMemo(() => {
     const set = new Set<string>();
@@ -103,6 +106,32 @@ export default function Certifications() {
                           {cert.organization}
                         </p>
                       </div>
+
+                      {/* Certificate Ceremony Image Preview if available */}
+                      {cert.image && (
+                        <div className="pt-2">
+                          <button
+                            type="button"
+                            onClick={() => setActiveImage({ src: cert.image!, title: cert.title })}
+                            className="w-full group/img relative rounded-xl overflow-hidden border border-orange-400/20 bg-black/40 aspect-[16/10] block text-left transition-all hover:border-orange-400/50 hover:shadow-[0_0_25px_rgba(249,115,22,0.15)]"
+                          >
+                            <img
+                              src={cert.image}
+                              alt={cert.title}
+                              className="w-full h-full object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
+                              loading="lazy"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-90 group-hover/img:opacity-95 transition-opacity flex items-end p-3 justify-between">
+                              <span className="text-[11px] font-semibold text-orange-200 flex items-center gap-1.5 font-mono">
+                                <Maximize2 size={12} className="text-orange-400" /> ISRO Shadnagar Ceremony
+                              </span>
+                              <span className="text-[10px] px-2 py-0.5 rounded-md bg-orange-500/20 text-orange-300 border border-orange-400/30 font-mono">
+                                NRSC
+                              </span>
+                            </div>
+                          </button>
+                        </div>
+                      )}
                     </div>
 
                     {/* Footer Skills & Date */}
@@ -139,6 +168,53 @@ export default function Certifications() {
           </AnimatePresence>
         </div>
       </div>
+
+      {/* Lightbox / Modal for Certificate Ceremony Photo */}
+      <AnimatePresence>
+        {activeImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActiveImage(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-3xl w-full max-h-[90vh] bg-[#09152e] border border-orange-400/30 rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(249,115,22,0.2)] flex flex-col"
+            >
+              {/* Modal Header */}
+              <div className="flex items-center justify-between p-4 border-b border-white/10 bg-[#060c1c]">
+                <div className="flex items-center gap-2">
+                  <Award size={16} className="text-orange-400" />
+                  <h4 className="text-sm font-bold text-white tracking-tight line-clamp-1">
+                    {activeImage.title}
+                  </h4>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setActiveImage(null)}
+                  className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              {/* Modal Image */}
+              <div className="p-3 sm:p-4 overflow-auto flex items-center justify-center bg-black/40">
+                <img
+                  src={activeImage.src}
+                  alt={activeImage.title}
+                  className="max-h-[75vh] w-auto object-contain rounded-lg"
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

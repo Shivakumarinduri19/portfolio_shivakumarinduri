@@ -177,7 +177,9 @@ export default function Achievements() {
                                     ? "Award ceremony photo"
                                     : ach.id === "4"
                                     ? "1st Prize ceremony photo"
-                                    : "Meritorious award ceremony"}
+                                    : ach.id === "5"
+                                    ? "Meritorious award ceremony"
+                                    : "ISRO / NRSC certificate"}
                                 </span>
                                 <span className="text-[10px] px-2 py-0.5 rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 font-mono">
                                   {ach.id === "1"
@@ -188,7 +190,9 @@ export default function Achievements() {
                                     ? "National Winner"
                                     : ach.id === "4"
                                     ? "1st Prize"
-                                    : "Adilabad"}
+                                    : ach.id === "5"
+                                    ? "Adilabad"
+                                    : "ISRO NRSC"}
                                 </span>
                               </div>
                             </button>

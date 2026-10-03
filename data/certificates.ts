@@ -9,6 +9,7 @@ export interface Certificate {
   category: string;
   color: string;
   skills: string[];
+  image?: string;
 }
 
 export const certificates: Certificate[] = [
@@ -61,5 +62,6 @@ export const certificates: Certificate[] = [
     color: "orange",
     skills: ["Bhuvan Geoportal", "SAR Data Processing", "NISAR Trends"],
     credentialUrl: "#",
+    image: "/images/nrsc-training-ceremony.jpg",
   },
 ];

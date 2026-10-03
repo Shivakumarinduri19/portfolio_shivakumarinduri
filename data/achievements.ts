@@ -112,5 +112,7 @@ export const achievements: Achievement[] = [
       "Completed specialized geospatial and satellite training focusing on the Bhuvan Geoportal and Synthetic Aperture Radar (SAR) data (NISAR) trends at the ISRO Shadnagar facility.",
     icon: "GraduationCap",
     color: "orange",
+    highlight: true,
+    image: "/images/nrsc-training-ceremony.jpg",
   },
 ];
