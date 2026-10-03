@@ -168,10 +168,27 @@ export default function Achievements() {
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover/img:opacity-90 transition-opacity flex items-end p-3 justify-between">
                                 <span className="text-[11px] font-semibold text-cyan-200 flex items-center gap-1.5 font-mono">
-                                  <Maximize2 size={12} className="text-cyan-400" /> Click to view poster
+                                  <Maximize2 size={12} className="text-cyan-400" />
+                                  {ach.id === "1"
+                                    ? "Click to view poster"
+                                    : ach.id === "2"
+                                    ? "UN Maps feature photo"
+                                    : ach.id === "3"
+                                    ? "Award ceremony photo"
+                                    : ach.id === "4"
+                                    ? "1st Prize ceremony photo"
+                                    : "Meritorious award ceremony"}
                                 </span>
                                 <span className="text-[10px] px-2 py-0.5 rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 font-mono">
-                                  NSD26-G-17
+                                  {ach.id === "1"
+                                    ? "NSD26-G-17"
+                                    : ach.id === "2"
+                                    ? "UN Maps"
+                                    : ach.id === "3"
+                                    ? "National Winner"
+                                    : ach.id === "4"
+                                    ? "1st Prize"
+                                    : "Adilabad"}
                                 </span>
                               </div>
                             </button>

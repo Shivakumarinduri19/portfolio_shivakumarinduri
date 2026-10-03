@@ -87,6 +87,7 @@ export const achievements: Achievement[] = [
     icon: "Medal",
     color: "purple",
     highlight: true,
+    image: "/images/meritorious-student-award.jpg",
   },
   {
     id: "6",
