@@ -18,31 +18,32 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Shiva Kumar | Geoinformatics & GeoAI Specialist Portfolio",
+  title: "Shiva Kumar Induri | GeoAI & Geoinformatics Specialist Portfolio",
   description:
-    "Professional portfolio of Shiva Kumar, a Geoinformatics student specializing in GIS, Remote Sensing, GeoAI, Machine Learning, and WebGIS applications. Winner of national hackathons.",
+    "Professional portfolio of Shiva Kumar Induri, final year Geoinformatics & AIML student at JNTUH specializing in Remote Sensing, Google Earth Engine, GeoAI, and WebGIS. National Winner of Jal Shakti Hackathon 2025 (₹1,00,000 Grant).",
   keywords: [
+    "Shiva Kumar Induri",
     "Geoinformatics",
     "GIS Analyst",
     "Remote Sensing",
     "GeoAI",
-    "Machine Learning",
-    "Shiva Kumar",
     "Google Earth Engine",
+    "JNTUH",
+    "HydroHarvest AI",
+    "Jal Shakti Hackathon",
     "WebGIS",
     "PostGIS",
-    "Hyderabad GIS",
   ],
-  authors: [{ name: "Shiva Kumar", url: "https://github.com/shivakumarenduri" }],
-  creator: "Shiva Kumar",
+  authors: [{ name: "Shiva Kumar Induri", url: "https://github.com/Shivakumarinduri19" }],
+  creator: "Shiva Kumar Induri",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://shiva-portfolio.vercel.app",
-    title: "Shiva Kumar | Geoinformatics & GeoAI Portfolio",
+    title: "Shiva Kumar Induri | GeoAI & Geoinformatics Specialist Portfolio",
     description:
-      "Explore featured GIS, Remote Sensing, and machine learning research projects by Shiva Kumar.",
-    siteName: "Shiva Kumar Geoinformatics Portfolio",
+      "Explore featured GIS, Remote Sensing, and machine learning research projects by Shiva Kumar Induri.",
+    siteName: "Shiva Kumar Induri Geoinformatics Portfolio",
   },
   robots: {
     index: true,
@@ -56,24 +57,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark h-full scroll-smooth" style={{ colorScheme: "dark" }}>
+    <html lang="en" className="dark h-full scroll-smooth" style={{ colorScheme: "dark" }} suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} min-h-full flex flex-col bg-[#030712] text-[#f0f4ff] font-sans antialiased selection:bg-cyan-500/30 selection:text-white noise-overlay`}
+        className={`${inter.variable} ${jetbrainsMono.variable} min-h-full flex flex-col bg-[#030712] text-[#f8fafc] font-sans antialiased selection:bg-cyan-500/25 selection:text-white`}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          {/* Global animated Loading screen */}
+          {/* Animated Loading Screen */}
           <LoadingScreen />
 
-          {/* Sticky glass Header */}
+          {/* Floating Glass Navbar */}
           <Navbar />
 
-          {/* Main page content container */}
-          <main className="flex-grow pt-16">{children}</main>
+          {/* Main page content */}
+          <main className="flex-grow">{children}</main>
 
-          {/* Site footer */}
+          {/* Site Footer */}
           <Footer />
 
-          {/* Back to top bubble */}
+          {/* Back to top floating trigger */}
           <BackToTop />
         </ThemeProvider>
       </body>

@@ -1,258 +1,276 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { hackathons, Hackathon, HackathonOutcome } from "@/data/hackathons";
+import { hackathons, Hackathon } from "@/data/hackathons";
 import SectionTitle from "@/components/ui/SectionTitle";
 import GlowCard from "@/components/ui/GlowCard";
-import { Calendar, Users, Trophy, ChevronDown, ChevronUp, Code2, Award, Sparkles } from "lucide-react";
+import {
+  Trophy,
+  Calendar,
+  Users,
+  Award,
+  ChevronDown,
+  ChevronUp,
+  Code2,
+  Sparkles,
+  ExternalLink,
+  Target,
+  Cpu,
+  Maximize2,
+  X,
+} from "lucide-react";
+import Link from "next/link";
 
 export default function Hackathons() {
-  const [selectedOutcome, setSelectedOutcome] = useState<string>("All");
-  const [selectedYear, setSelectedYear] = useState<string>("All");
-  const [expandedId, setExpandedId] = useState<string | null>(null);
-
-  // Extract unique outcomes and years for filter dynamically
-  const outcomes = useMemo(() => {
-    const set = new Set<string>();
-    hackathons.forEach((h) => {
-      if (h.outcome === "Winner") set.add("Winner");
-      else if (h.outcome === "Finalist" || h.outcome === "Runner-Up") set.add("Finalist");
-      else set.add("Top 10");
-    });
-    return ["All", ...Array.from(set)];
-  }, []);
-
-  const years = useMemo(() => {
-    const set = new Set<string>();
-    hackathons.forEach((h) => set.add(h.year.toString()));
-    return ["All", ...Array.from(set).sort((a, b) => b.localeCompare(a))];
-  }, []);
-
-  // Filter hackathons
-  const filteredHackathons = useMemo(() => {
-    return hackathons.filter((h) => {
-      const matchOutcome =
-        selectedOutcome === "All"
-          ? true
-          : selectedOutcome === "Winner"
-          ? h.outcome === "Winner"
-          : selectedOutcome === "Finalist"
-          ? h.outcome === "Finalist" || h.outcome === "Runner-Up"
-          : h.outcome === "Top 10";
-
-      const matchYear = selectedYear === "All" ? true : h.year.toString() === selectedYear;
-
-      return matchOutcome && matchYear;
-    });
-  }, [selectedOutcome, selectedYear]);
+  const [expandedId, setExpandedId] = useState<string | null>("1");
+  const [activeImage, setActiveImage] = useState<{ src: string; title: string } | null>(null);
 
   const toggleExpand = (id: string) => {
     setExpandedId(expandedId === id ? null : id);
   };
 
   return (
-    <section id="hackathons" className="section-padding relative bg-[#030712]">
-      <div className="absolute inset-0 grid-bg opacity-15" />
+    <section id="hackathons" className="section-padding relative bg-[#070d1d] overflow-hidden">
+      <div className="absolute inset-0 grid-bg opacity-15 pointer-events-none" />
 
-      {/* Decorative gradients */}
+      {/* Decorative radial gradients */}
       <div
-        className="absolute top-1/4 left-10 w-96 h-96 rounded-full blur-[140px] opacity-5 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #8b5cf6, transparent)" }}
+        className="absolute top-1/3 left-10 w-[500px] h-[500px] rounded-full blur-[160px] opacity-10 pointer-events-none"
+        style={{ background: "radial-gradient(circle, #f59e0b, transparent)" }}
       />
       <div
-        className="absolute bottom-1/4 right-10 w-96 h-96 rounded-full blur-[140px] opacity-5 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #00d4ff, transparent)" }}
+        className="absolute bottom-1/3 right-10 w-[500px] h-[500px] rounded-full blur-[160px] opacity-10 pointer-events-none"
+        style={{ background: "radial-gradient(circle, #00f0ff, transparent)" }}
       />
 
       <div className="section-container relative z-10">
         <SectionTitle
-          tag="Hackathons & Competitions"
-          title="Battle-Tested Innovations"
-          subtitle="A showcase of hackathons and geospatial innovation sprints where I designed and deployed fast-paced spatial intelligence solutions."
-          centered
+          tag="Competitions & Sprints"
+          title="National Hackathon Victories"
+          subtitle="Battle-tested geospatial & AI systems engineered under rapid innovation sprints, solving critical national water and sustainability challenges."
           className="mb-12"
         />
 
-        {/* Filter Controls */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10 p-5 glass-card rounded-2xl border border-white/[0.05]">
-          {/* Outcome filters */}
-          <div className="flex flex-wrap gap-2">
-            {outcomes.map((o) => (
-              <button
-                key={o}
-                onClick={() => setSelectedOutcome(o)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all duration-300 border ${
-                  selectedOutcome === o
-                    ? "border-cyan-400/50 bg-cyan-400/10 text-cyan-400 shadow-[0_0_10px_rgba(0,212,255,0.1)]"
-                    : "border-white/[0.06] bg-white/[0.02] text-slate-400 hover:text-white"
-                }`}
-              >
-                {o === "All" ? "All Outcomes" : o + "s"}
-              </button>
-            ))}
-          </div>
-
-          {/* Year filters */}
-          <div className="flex flex-wrap gap-2">
-            {years.map((y) => (
-              <button
-                key={y}
-                onClick={() => setSelectedYear(y)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all duration-300 border ${
-                  selectedYear === y
-                    ? "border-cyan-400/50 bg-cyan-400/10 text-cyan-400 shadow-[0_0_10px_rgba(0,212,255,0.1)]"
-                    : "border-white/[0.06] bg-white/[0.02] text-slate-400 hover:text-white"
-                }`}
-              >
-                {y === "All" ? "All Years" : y}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Timeline Stack */}
-        <div className="relative border-l-2 border-white/[0.06] pl-6 ml-4 space-y-12">
-          {filteredHackathons.map((h, index) => {
+        {/* Hackathon Cards Grid / Timeline */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {hackathons.map((h, idx) => {
             const isWinner = h.outcome === "Winner";
-            const isRunner = h.outcome === "Runner-Up";
             const isExpanded = expandedId === h.id;
-
-            const glowColor = isWinner ? "cyan" : isRunner ? "emerald" : "purple";
+            const glowColor = h.color === "cyan" ? "cyan" : "emerald";
 
             return (
-              <div key={h.id} className="relative">
-                {/* Timeline Bullet Pin */}
-                <span
-                  className={`absolute -left-[37px] top-1.5 w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs transition-all duration-300 ${
-                    isWinner
-                      ? "bg-cyan-950 border-cyan-400 text-cyan-400 shadow-[0_0_10px_rgba(0,212,255,0.6)]"
-                      : isRunner
-                      ? "bg-emerald-950 border-emerald-400 text-emerald-400 shadow-[0_0_10px_rgba(0,255,136,0.6)]"
-                      : "bg-purple-950 border-purple-400 text-purple-400"
-                  }`}
-                >
-                  {isWinner ? <Trophy size={12} /> : isRunner ? <Award size={12} /> : <Sparkles size={12} />}
-                </span>
-
-                <GlowCard glowColor={glowColor} className="p-6">
-                  {/* Summary Card Header */}
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div className="space-y-1.5">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-[10px] font-mono bg-cyan-400/5 text-cyan-400 border border-cyan-400/10 px-2 py-0.5 rounded">
-                          {h.year}
-                        </span>
-                        <span
-                          className={`text-[10px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded ${
-                            isWinner
-                              ? "bg-cyan-500/10 text-cyan-400 border border-cyan-400/20"
-                              : isRunner
-                              ? "bg-emerald-500/10 text-emerald-400 border border-emerald-400/20"
-                              : "bg-purple-500/10 text-purple-400 border border-purple-400/20"
-                          }`}
-                        >
-                          {h.achievement}
-                        </span>
+              <motion.div
+                key={h.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="h-full flex flex-col"
+              >
+                <GlowCard glowColor={glowColor} className="p-6 sm:p-7 flex flex-col justify-between h-full">
+                  <div className="space-y-5">
+                    {/* Top Trophy Banner */}
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold font-mono">
+                        <Trophy size={14} className="text-amber-400" />
+                        <span>{h.achievement}</span>
                       </div>
-                      <h3 className="text-xl font-bold text-white leading-snug">{h.title}</h3>
-                      <p className="text-sm text-slate-400 font-semibold">{h.event}</p>
-                      <p className="text-xs text-slate-500">{h.organizer}</p>
-                    </div>
 
-                    <div className="flex items-center gap-4 flex-wrap md:flex-col md:items-end text-xs text-slate-500 flex-shrink-0">
-                      <span className="flex items-center gap-1">
+                      <span className="text-xs font-mono text-slate-400 flex items-center gap-1">
                         <Calendar size={13} /> {h.date}
                       </span>
-                      <span className="flex items-center gap-1">
-                        <Users size={13} /> Team Size: {h.teamSize}
+                    </div>
+
+                    {/* Main Title & Event */}
+                    <div>
+                      <h3 className="text-xl sm:text-2xl font-black text-white leading-snug tracking-tight">
+                        {h.title}
+                      </h3>
+                      <p className="text-sm font-semibold text-cyan-300 mt-1">{h.event}</p>
+                      <p className="text-xs text-slate-400 font-medium mt-0.5">{h.organizer}</p>
+                    </div>
+
+                    {/* Quick Metadata Pill row */}
+                    <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
+                      <span className="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/[0.08] text-slate-300 font-mono">
+                        Role: {h.myRole}
                       </span>
+                      <span className="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/[0.08] text-slate-300 font-mono flex items-center gap-1">
+                        <Users size={12} /> Team Size: {h.teamSize}
+                      </span>
+                    </div>
+
+                    {/* Solution Description */}
+                    <div className="p-4 rounded-xl bg-[#030712]/70 border border-white/[0.06] text-xs sm:text-sm text-slate-300 leading-relaxed space-y-2">
+                      <div className="flex items-center gap-1.5 font-bold text-cyan-300 font-mono text-[11px] uppercase">
+                        <Target size={13} className="text-cyan-400" />
+                        Problem & Engineered Solution:
+                      </div>
+                      <p>{h.solution}</p>
+                    </div>
+
+                    {/* Award Ceremony Photo Preview if present */}
+                    {h.image && (
+                      <div className="pt-1">
+                        <button
+                          type="button"
+                          onClick={() => setActiveImage({ src: h.image!, title: `${h.title} — ${h.achievement}` })}
+                          className={`w-full group/img relative rounded-xl overflow-hidden border bg-black/40 aspect-[16/9] block text-left transition-all ${
+                            h.color === "emerald"
+                              ? "border-emerald-400/20 hover:border-emerald-400/50 hover:shadow-[0_0_25px_rgba(16,185,129,0.15)]"
+                              : "border-amber-400/20 hover:border-amber-400/50 hover:shadow-[0_0_25px_rgba(245,158,11,0.15)]"
+                          }`}
+                        >
+                          <img
+                            src={h.image}
+                            alt={`${h.title} Award Ceremony`}
+                            className="w-full h-full object-cover object-center transition-transform duration-500 group-hover/img:scale-105"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-90 group-hover/img:opacity-95 transition-opacity flex items-end p-3 justify-between">
+                            <span className="text-[11px] font-semibold text-slate-200 flex items-center gap-1.5 font-mono">
+                              <Maximize2 size={12} className={h.color === "emerald" ? "text-emerald-400" : "text-amber-400"} />
+                              {h.id === "2" ? "TGPCB Eco Champions Award Ceremony" : "World Water Day Conclave Award Ceremony"}
+                            </span>
+                            <span className={`text-[10px] px-2 py-0.5 rounded-md font-mono border ${
+                              h.color === "emerald"
+                                ? "bg-emerald-500/20 text-emerald-300 border-emerald-400/30"
+                                : "bg-amber-500/20 text-amber-300 border-amber-400/30"
+                            }`}>
+                              {h.id === "2" ? "1st Prize" : "New Delhi"}
+                            </span>
+                          </div>
+                        </button>
+                      </div>
+                    )}
+
+                    {/* Expandable Architecture Drawer */}
+                    <AnimatePresence initial={false}>
+                      {isExpanded && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="space-y-4 pt-2 overflow-hidden border-t border-white/[0.06]"
+                        >
+                          <div className="space-y-2">
+                            <span className="text-[11px] font-bold text-slate-400 uppercase font-mono block">
+                              Problem Statement:
+                            </span>
+                            <p className="text-xs text-slate-400 leading-relaxed">
+                              {h.problemStatement}
+                            </p>
+                          </div>
+
+                          <div className="space-y-2">
+                            <span className="text-[11px] font-bold text-slate-400 uppercase font-mono block">
+                              Impact Summary:
+                            </span>
+                            <p className="text-xs text-slate-400 leading-relaxed">
+                              {h.description}
+                            </p>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                  {/* Bottom Tech Stack & Expand Toggle */}
+                  <div className="pt-6 space-y-4">
+                    <div className="h-px bg-white/[0.06]" />
+
+                    <div className="flex flex-wrap gap-1">
+                      {h.techStack.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-2 py-0.5 rounded bg-cyan-400/5 text-cyan-300 text-[10px] font-mono"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="flex items-center justify-between pt-1">
                       <button
                         onClick={() => toggleExpand(h.id)}
-                        className="flex items-center gap-1 px-3 py-1 rounded bg-white/5 hover:bg-cyan-400/10 text-cyan-400 text-xs font-semibold transition-all"
+                        className="inline-flex items-center gap-1 text-xs font-semibold text-cyan-400 hover:text-cyan-300 transition-colors cursor-pointer"
                       >
                         {isExpanded ? (
                           <>
-                            Collapse <ChevronUp size={12} />
+                            Less Details <ChevronUp size={13} />
                           </>
                         ) : (
                           <>
-                            Expand details <ChevronDown size={12} />
+                            View Architecture <ChevronDown size={13} />
                           </>
                         )}
                       </button>
+
+                      {h.linkedProject && (
+                        <Link
+                          href={`/projects/${h.linkedProject}`}
+                          className="inline-flex items-center gap-1 text-xs font-bold text-emerald-400 hover:text-emerald-300 transition-colors"
+                        >
+                          Project Case Study →
+                        </Link>
+                      )}
                     </div>
                   </div>
-
-                  {/* Expanded Body details with Framer motion collapse animation */}
-                  <AnimatePresence initial={false}>
-                    {isExpanded && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="overflow-hidden mt-6 pt-6 border-t border-white/[0.04] space-y-6"
-                      >
-                        <div className="grid md:grid-cols-2 gap-6 text-sm">
-                          {/* Role and problem */}
-                          <div className="space-y-4">
-                            <div>
-                              <h4 className="font-semibold text-white text-xs uppercase tracking-wider mb-1.5 text-cyan-400">
-                                My Role
-                              </h4>
-                              <p className="text-slate-300 leading-relaxed font-medium">{h.myRole}</p>
-                            </div>
-                            <div>
-                              <h4 className="font-semibold text-white text-xs uppercase tracking-wider mb-1.5 text-slate-400">
-                                Problem Statement
-                              </h4>
-                              <p className="text-slate-400 leading-relaxed">{h.problemStatement}</p>
-                            </div>
-                          </div>
-
-                          {/* Developed Solution */}
-                          <div className="space-y-4">
-                            <div>
-                              <h4 className="font-semibold text-white text-xs uppercase tracking-wider mb-1.5 text-emerald-400">
-                                Solution Developed
-                              </h4>
-                              <p className="text-slate-300 leading-relaxed">{h.solution}</p>
-                            </div>
-                            <div>
-                              <h4 className="font-semibold text-white text-xs uppercase tracking-wider mb-1.5 text-slate-400">
-                                Summary Description
-                              </h4>
-                              <p className="text-slate-400 leading-relaxed">{h.description}</p>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Tech Stack used */}
-                        <div className="space-y-2 pt-2">
-                          <h4 className="font-semibold text-slate-400 text-xs uppercase tracking-wider flex items-center gap-1.5">
-                            <Code2 size={13} /> Technologies Used
-                          </h4>
-                          <div className="flex flex-wrap gap-1.5">
-                            {h.techStack.map((tech) => (
-                              <span
-                                key={tech}
-                                className="px-2.5 py-0.5 rounded bg-cyan-400/5 border border-cyan-400/10 text-cyan-300 text-xs font-mono"
-                              >
-                                {tech}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
                 </GlowCard>
-              </div>
+              </motion.div>
             );
           })}
         </div>
       </div>
+
+      {/* Lightbox / Modal for Award Ceremony Photo */}
+      <AnimatePresence>
+        {activeImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActiveImage(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-3xl w-full max-h-[90vh] bg-[#09152e] border border-amber-400/30 rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(245,158,11,0.2)] flex flex-col"
+            >
+              {/* Modal Header */}
+              <div className="flex items-center justify-between p-4 border-b border-white/10 bg-[#060c1c]">
+                <div className="flex items-center gap-2">
+                  <Trophy size={16} className="text-amber-400" />
+                  <h4 className="text-sm font-bold text-white tracking-tight line-clamp-1">
+                    {activeImage.title}
+                  </h4>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setActiveImage(null)}
+                  className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              {/* Modal Image */}
+              <div className="p-3 sm:p-4 overflow-auto flex items-center justify-center bg-black/40">
+                <img
+                  src={activeImage.src}
+                  alt={activeImage.title}
+                  className="max-h-[75vh] w-auto object-contain rounded-lg"
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

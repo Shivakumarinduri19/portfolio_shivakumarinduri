@@ -37,7 +37,7 @@ export default function GISMap() {
         />
 
         {/* Dynamic map container */}
-        <div className="w-full glass-card rounded-2xl overflow-hidden border border-white/[0.05] p-2 hover:border-cyan-400/20 transition-all duration-300">
+        <div className="w-full hud-panel rounded-2xl overflow-hidden border border-white/[0.05] p-2 hover:border-cyan-400/20 transition-all duration-300">
           <GISMapClient />
         </div>
       </div>

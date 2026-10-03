@@ -1,80 +1,88 @@
+/* eslint-disable react-hooks/purity */
 "use client";
 
 import { useRef, Suspense, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Sphere, Ring } from "@react-three/drei";
 import * as THREE from "three";
+import { OrbitControls } from "@react-three/drei";
 
-function EarthSphere() {
-  const earthRef = useRef<THREE.Mesh>(null!);
-  const atmosphereRef = useRef<THREE.Mesh>(null!);
+function PointCloudEarth() {
+  const earthRef = useRef<THREE.Points>(null!);
+  
+  const { positions, colors } = useMemo(() => {
+    const count = 3000;
+    const positions = new Float32Array(count * 3);
+    const colors = new Float32Array(count * 3);
+    
+    const colorA = new THREE.Color(0x00d4ff); // Cyan
+    const colorB = new THREE.Color(0x00ff88); // Emerald
 
-  const earthMaterial = useMemo(() => {
-    // Create a procedural earth-like material using vertex colors
-    const material = new THREE.MeshPhongMaterial({
-      color: new THREE.Color(0x0a4a6e),
-      emissive: new THREE.Color(0x001a2e),
-      emissiveIntensity: 0.3,
-      specular: new THREE.Color(0x00d4ff),
-      shininess: 20,
-      wireframe: false,
-    });
-    return material;
+    for (let i = 0; i < count; i++) {
+      // Golden spiral method for even distribution
+      const phi = Math.acos(1 - 2 * (i + 0.5) / count);
+      const theta = Math.PI * (1 + Math.sqrt(5)) * (i + 0.5);
+      
+      const r = 2.0;
+      
+      positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      positions[i * 3 + 2] = r * Math.cos(phi);
+      
+      // Randomly mix colors
+      const mixRatio = Math.random();
+      const mixedColor = colorA.clone().lerp(colorB, mixRatio);
+      colors[i * 3] = mixedColor.r;
+      colors[i * 3 + 1] = mixedColor.g;
+      colors[i * 3 + 2] = mixedColor.b;
+    }
+    return { positions, colors };
   }, []);
 
-  useFrame((state) => {
+  useFrame(() => {
     if (earthRef.current) {
       earthRef.current.rotation.y += 0.002;
-    }
-    if (atmosphereRef.current) {
-      atmosphereRef.current.rotation.y += 0.001;
+      earthRef.current.rotation.x += 0.0005;
     }
   });
 
   return (
     <group>
-      {/* Main Earth sphere */}
-      <mesh ref={earthRef} material={earthMaterial}>
-        <sphereGeometry args={[2, 64, 64]} />
-      </mesh>
-
-      {/* Atmosphere glow */}
-      <mesh ref={atmosphereRef} scale={1.05}>
-        <sphereGeometry args={[2, 32, 32]} />
-        <meshBasicMaterial
-          color={new THREE.Color(0x00d4ff)}
-          transparent
-          opacity={0.06}
-          side={THREE.BackSide}
+      {/* Point Cloud Sphere */}
+      <points ref={earthRef}>
+        <bufferGeometry>
+          <bufferAttribute
+            attach="attributes-position"
+            args={[positions, 3]}
+          />
+          <bufferAttribute
+            attach="attributes-color"
+            args={[colors, 3]}
+          />
+        </bufferGeometry>
+        <pointsMaterial 
+          size={0.03} 
+          vertexColors 
+          transparent 
+          opacity={0.8} 
+          sizeAttenuation 
         />
-      </mesh>
+      </points>
 
-      {/* Outer glow layer */}
-      <mesh scale={1.12}>
-        <sphereGeometry args={[2, 32, 32]} />
-        <meshBasicMaterial
-          color={new THREE.Color(0x00d4ff)}
-          transparent
-          opacity={0.02}
-          side={THREE.BackSide}
-        />
-      </mesh>
-
-      {/* Grid lines overlay */}
-      <mesh rotation={[0, 0, 0]}>
-        <sphereGeometry args={[2.01, 24, 12]} />
-        <meshBasicMaterial
-          color={new THREE.Color(0x00d4ff)}
-          transparent
-          opacity={0.08}
-          wireframe
+      {/* Wireframe Core */}
+      <mesh>
+        <icosahedronGeometry args={[1.9, 2]} />
+        <meshBasicMaterial 
+          color={0x00d4ff} 
+          wireframe 
+          transparent 
+          opacity={0.05} 
         />
       </mesh>
     </group>
   );
 }
 
-function OrbitRing({ radius, speed, tilt }: { radius: number; speed: number; tilt: number }) {
+function OrbitRing({ radius, speed, tilt, color }: { radius: number; speed: number; tilt: number, color: number }) {
   const ref = useRef<THREE.Group>(null!);
 
   useFrame(() => {
@@ -84,24 +92,24 @@ function OrbitRing({ radius, speed, tilt }: { radius: number; speed: number; til
   return (
     <group ref={ref} rotation={[tilt, 0, 0]}>
       <mesh>
-        <torusGeometry args={[radius, 0.005, 4, 80]} />
-        <meshBasicMaterial color={0x00d4ff} transparent opacity={0.2} />
+        <torusGeometry args={[radius, 0.005, 4, 100]} />
+        <meshBasicMaterial color={color} transparent opacity={0.3} />
       </mesh>
-      {/* Satellite dot */}
+      {/* Satellite Node */}
       <mesh position={[radius, 0, 0]}>
-        <sphereGeometry args={[0.04, 8, 8]} />
-        <meshBasicMaterial color={0x00ff88} />
+        <sphereGeometry args={[0.06, 8, 8]} />
+        <meshBasicMaterial color={color} />
       </mesh>
     </group>
   );
 }
 
-function Particles() {
-  const count = 800;
+function DataParticles() {
+  const count = 1000;
   const positions = useMemo(() => {
     const pos = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
-      const r = 6 + Math.random() * 8;
+      const r = 5 + Math.random() * 10;
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(2 * Math.random() - 1);
       pos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
@@ -119,7 +127,7 @@ function Particles() {
           args={[positions, 3]}
         />
       </bufferGeometry>
-      <pointsMaterial size={0.04} color={0x88ccff} transparent opacity={0.6} sizeAttenuation />
+      <pointsMaterial size={0.03} color={0x88ccff} transparent opacity={0.4} sizeAttenuation />
     </points>
   );
 }
@@ -127,29 +135,34 @@ function Particles() {
 function Scene() {
   return (
     <>
-      {/* Lighting */}
-      <ambientLight intensity={0.3} />
-      <directionalLight position={[10, 5, 5]} intensity={1.5} color={0xffffff} />
-      <pointLight position={[-5, -5, -5]} intensity={0.5} color={0x00d4ff} />
-      <pointLight position={[0, 0, 8]} intensity={0.3} color={0x0066ff} />
+      <ambientLight intensity={0.5} />
+      
+      {/* Main interactive earth */}
+      <PointCloudEarth />
 
-      {/* Earth */}
-      <EarthSphere />
+      {/* Orbits representing satellites/data streams */}
+      <OrbitRing radius={2.8} speed={0.008} tilt={0.3} color={0x00d4ff} />
+      <OrbitRing radius={3.4} speed={-0.005} tilt={0.8} color={0x00ff88} />
+      <OrbitRing radius={4.2} speed={0.003} tilt={1.2} color={0x88ccff} />
 
-      {/* Orbit rings */}
-      <OrbitRing radius={3.0} speed={0.008} tilt={0.3} />
-      <OrbitRing radius={3.5} speed={-0.005} tilt={0.8} />
-      <OrbitRing radius={4.0} speed={0.004} tilt={1.2} />
-
-      {/* Star particles */}
-      <Particles />
+      {/* Floating ambient data points */}
+      <DataParticles />
+      
+      {/* Interactive controls */}
+      <OrbitControls 
+        enableZoom={false} 
+        enablePan={false}
+        autoRotate={false}
+        maxPolarAngle={Math.PI / 1.5}
+        minPolarAngle={Math.PI / 3}
+      />
     </>
   );
 }
 
 export default function EarthGlobe() {
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full cursor-grab active:cursor-grabbing">
       <Canvas
         camera={{ position: [0, 0, 7], fov: 45 }}
         gl={{ antialias: true, alpha: true }}
@@ -162,3 +175,4 @@ export default function EarthGlobe() {
     </div>
   );
 }
+

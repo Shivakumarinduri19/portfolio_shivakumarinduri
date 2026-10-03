@@ -50,7 +50,7 @@ export const certificates: Certificate[] = [
     category: "Disaster Management",
     color: "purple",
     skills: ["UN Mappers", "Fire Risk Mapping", "Adilabad Spatial Data"],
-    credentialUrl: "#",
+    credentialUrl: "https://maps.un.org/news/un-mappers-humanitarian-mapping-sessions-jntu-hyderabad",
   },
   {
     id: "5",

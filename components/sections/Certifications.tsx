@@ -5,7 +5,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { certificates, Certificate } from "@/data/certificates";
 import SectionTitle from "@/components/ui/SectionTitle";
 import GlowCard from "@/components/ui/GlowCard";
-import { Award, ExternalLink, Calendar, BookOpen, Layers, CheckCircle } from "lucide-react";
+import {
+  Award,
+  ExternalLink,
+  Calendar,
+  CheckCircle2,
+  Sparkles,
+  ShieldCheck,
+} from "lucide-react";
 
 export default function Certifications() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
@@ -22,34 +29,27 @@ export default function Certifications() {
   });
 
   return (
-    <section id="certifications" className="section-padding relative bg-[#0a0f1e]/40">
-      <div className="absolute inset-0 grid-bg opacity-10" />
-
-      {/* Ambient glows */}
-      <div
-        className="absolute top-1/2 right-1/4 w-[500px] h-[500px] rounded-full blur-[140px] opacity-[0.03] pointer-events-none"
-        style={{ background: "radial-gradient(circle, #00d4ff, transparent)" }}
-      />
+    <section id="certifications" className="section-padding relative bg-[#030712] overflow-hidden">
+      <div className="absolute inset-0 grid-bg opacity-15 pointer-events-none" />
 
       <div className="section-container relative z-10">
         <SectionTitle
-          tag="Professional Credentials"
-          title="Certifications & Training"
-          subtitle="A catalog of my professional training, university courses, and verified certifications in GIS technology, deep learning, and remote sensing."
-          centered
-          className="mb-12"
+          tag="Credentials & Training"
+          title="Verified Professional Certifications"
+          subtitle="Specialized training and verified credentials from ISRO/NRSC, Oracle Cloud, UN Mappers, and academic GIS institutes."
+          className="mb-10"
         />
 
         {/* Category Filters */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
+        <div className="flex flex-wrap gap-2 mb-8">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 border ${
+              className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all border ${
                 selectedCategory === cat
-                  ? "border-cyan-400/50 bg-cyan-400/10 text-cyan-400 shadow-[0_0_15px_rgba(0,212,255,0.15)]"
-                  : "border-white/[0.08] bg-white/[0.02] text-slate-400 hover:text-white hover:border-slate-600"
+                  ? "border-cyan-400/50 bg-cyan-400/10 text-cyan-300 shadow-[0_0_15px_rgba(0,240,255,0.15)]"
+                  : "border-white/[0.08] bg-[#070d1d] text-slate-400 hover:text-white"
               }`}
             >
               {cat}
@@ -57,8 +57,8 @@ export default function Certifications() {
           ))}
         </div>
 
-        {/* Certificates Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Certifications Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence mode="popLayout">
             {filteredCertificates.map((cert, index) => {
               const glowColor =
@@ -76,64 +76,60 @@ export default function Certifications() {
                 <motion.div
                   key={cert.id}
                   layout
-                  initial={{ opacity: 0, scale: 0.9 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.35, delay: index * 0.05 }}
+                  className="h-full flex flex-col"
                 >
-                  <GlowCard glowColor={glowColor} className="p-6 flex flex-col h-full justify-between">
-                    {/* Header Info */}
+                  <GlowCard glowColor={glowColor} className="p-6 flex flex-col justify-between h-full">
                     <div className="space-y-4">
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center flex-shrink-0 text-cyan-400">
-                          <Award size={20} />
+                      {/* Header */}
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="w-10 h-10 rounded-xl bg-cyan-400/10 border border-cyan-400/20 flex items-center justify-center text-cyan-400 flex-shrink-0">
+                          <ShieldCheck size={20} />
                         </div>
-                        <span className="text-[10px] font-mono bg-cyan-400/5 text-cyan-400 border border-cyan-400/10 px-2 py-0.5 rounded">
+                        <span className="text-[10px] font-mono font-bold bg-cyan-400/5 text-cyan-300 border border-cyan-400/10 px-2.5 py-0.5 rounded-full uppercase">
                           {cert.category}
                         </span>
                       </div>
 
-                      <div className="space-y-1.5">
+                      {/* Title & Organization */}
+                      <div>
                         <h3 className="font-bold text-white text-base leading-snug tracking-tight">
                           {cert.title}
                         </h3>
-                        <p className="text-xs text-slate-400 font-semibold">
+                        <p className="text-xs text-slate-400 font-semibold mt-1">
                           {cert.organization}
                         </p>
                       </div>
                     </div>
 
-                    {/* Footer Info */}
-                    <div className="space-y-4 pt-6">
-                      <div className="h-px bg-white/[0.05]" />
+                    {/* Footer Skills & Date */}
+                    <div className="pt-6 space-y-4">
+                      <div className="h-px bg-white/[0.06]" />
 
-                      {/* Covered Skills */}
+                      {/* Skill Chips */}
                       <div className="flex flex-wrap gap-1">
                         {cert.skills.map((skill) => (
                           <span
                             key={skill}
-                            className="px-2 py-0.5 rounded bg-white/[0.03] border border-white/[0.06] text-slate-400 text-[10px] font-mono"
+                            className="px-2 py-0.5 rounded bg-white/[0.03] border border-white/[0.06] text-slate-300 text-[10px] font-mono"
                           >
                             {skill}
                           </span>
                         ))}
                       </div>
 
-                      <div className="flex items-center justify-between text-xs text-slate-500 pt-1">
-                        <span className="flex items-center gap-1">
-                          <Calendar size={13} /> {cert.date}
+                      <div className="flex items-center justify-between text-xs text-slate-400 pt-1">
+                        <span className="flex items-center gap-1 font-mono text-[11px]">
+                          <Calendar size={12} /> {cert.date}
                         </span>
 
-                        {cert.credentialUrl && (
-                          <a
-                            href={cert.credentialUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-xs font-semibold text-cyan-400 hover:text-cyan-300 transition-colors"
-                          >
-                            Verify <ExternalLink size={12} />
-                          </a>
-                        )}
+                        <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-400">
+                          <CheckCircle2 size={12} />
+                          Verified
+                        </span>
                       </div>
                     </div>
                   </GlowCard>

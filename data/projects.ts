@@ -22,6 +22,7 @@ export interface Project {
   results?: string[];
   objectives?: string[];
   period: string;
+  awardImage?: string;
 }
 
 export const projects: Project[] = [
@@ -43,6 +44,7 @@ By integrating 30-year historical rainfall datasets and soil permeability layers
     status: "In Progress",
     featured: true,
     image: "/images/projects/hydroharvest.jpg",
+    awardImage: "/images/jalshakti-award-ceremony.png",
     githubUrl: "https://github.com/Shivakumarinduri19/hydroharvest-ai",
     location: { lat: 17.385, lng: 78.4867, label: "Hyderabad, JNTUH" },
     datasets: [
@@ -57,8 +59,8 @@ By integrating 30-year historical rainfall datasets and soil permeability layers
       "Integrate 30-year historical rainfall data and soil permeability layers to optimize tank sizing",
     ],
     results: [
-      "Secured 1st Place at the Jal Shakti Hackathon 2025",
-      "Awarded INR 1,00,000 grant by the Ministry of Jal Shakti to scale the Proof-of-Concept",
+      "Secured 1st Place at the Jal Shakti Hackathon 2025 (National Winner)",
+      "Awarded INR 1,00,000 grant by the Ministry of Jal Shakti at the World Water Day Conclave, New Delhi",
       "Refined under the mentorship of Prof. Thatiparthi Vijaya Lakshmi and Dr. T. Ravi Shanker at JNTUH",
     ],
     period: "March 2026 – Present",

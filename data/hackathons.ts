@@ -20,6 +20,7 @@ export interface Hackathon {
   certificateUrl?: string;
   projectUrl?: string;
   linkedProject?: string;
+  image?: string;
 }
 
 export const hackathons: Hackathon[] = [
@@ -40,10 +41,11 @@ export const hackathons: Hackathon[] = [
     outcome: "Winner",
     achievement: "🏆 1st Place & INR 1,00,000 Development Grant",
     description:
-      "Secured 1st Place at the national hackathon and was awarded a development grant by the Ministry of Jal Shakti to develop and scale the project's Proof-of-Concept.",
+      "Secured 1st Place at the national hackathon and was awarded a development grant by the Ministry of Jal Shakti at the World Water Day Conclave to scale the project's Proof-of-Concept.",
     color: "cyan",
     badge: "🏆",
     linkedProject: "hydroharvest-ai",
+    image: "/images/jalshakti-award-ceremony.png",
   },
   {
     id: "2",
@@ -65,5 +67,6 @@ export const hackathons: Hackathon[] = [
       "Won 1st Prize from the Telangana State Pollution Control Board (TGPCB) for creating CampusCircle, an AI-IoT-enabled waste management system designed for school and university campuses.",
     color: "emerald",
     badge: "🏆",
+    image: "/images/campuscircle-award-ceremony.png",
   },
 ];
