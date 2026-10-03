@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import SectionTitle from "@/components/ui/SectionTitle";
 import GlowCard from "@/components/ui/GlowCard";
 import {
@@ -11,9 +12,22 @@ import {
   Sparkles,
   Radio,
   FileCheck,
+  Maximize2,
+  X,
 } from "lucide-react";
 
-const mediaCoverage = [
+interface MediaItem {
+  title: string;
+  source: string;
+  excerpt: string;
+  date: string;
+  type: string;
+  link: string;
+  color: string;
+  image?: string;
+}
+
+const mediaCoverage: MediaItem[] = [
   {
     title: "UN Mappers Humanitarian Mapping Sessions at JNTU Hyderabad — Special Mention",
     source: "United Nations (UN Maps / UN Mappers)",
@@ -22,6 +36,16 @@ const mediaCoverage = [
     type: "UN Global News",
     link: "https://maps.un.org/news/un-mappers-humanitarian-mapping-sessions-jntu-hyderabad",
     color: "cyan",
+  },
+  {
+    title: "‘ఏఐ’తో వర్షపు నీటిని ఒడిసిపట్టే విధానం — ‘హైడ్రో హార్వెస్టింగ్ ఏఐ’",
+    source: "Eenadu (ఈనాడు) — Greater Hyderabad Edition",
+    excerpt: "Prominently featured in Eenadu Greater Hyderabad print edition: Reports how JNTU Geoinformatics student Shiva Kumar Induri developed HydroHarvest AI using satellite imagery and 30-year rainfall analytics, receiving the national Jal Shakti Hackathon award in New Delhi.",
+    date: "March 2026",
+    type: "Print Press",
+    link: "https://www.eenadu.net",
+    color: "amber",
+    image: "/images/eenadu-hydroharvest-press.jpg",
   },
   {
     title: "Rainwater Harvesting System With 'AI' - JNTU Student Develops 'Hydro Harvesting AI'",
@@ -71,6 +95,8 @@ const mediaCoverage = [
 ];
 
 export default function Blog() {
+  const [activeImage, setActiveImage] = useState<{ src: string; title: string } | null>(null);
+
   return (
     <section id="blog" className="section-padding relative bg-[#070d1d] overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-15 pointer-events-none" />
@@ -94,6 +120,8 @@ export default function Blog() {
                 : post.color === "purple"
                 ? "purple"
                 : post.color === "orange"
+                ? "orange"
+                : post.color === "amber"
                 ? "orange"
                 : "blue";
 
@@ -131,6 +159,32 @@ export default function Blog() {
                       <p className="text-slate-300 text-xs sm:text-sm leading-relaxed line-clamp-4 pt-1">
                         {post.excerpt}
                       </p>
+
+                      {/* Image Thumbnail Preview if available */}
+                      {post.image && (
+                        <div className="pt-2">
+                          <button
+                            type="button"
+                            onClick={() => setActiveImage({ src: post.image!, title: post.title })}
+                            className="w-full group/img relative rounded-xl overflow-hidden border border-amber-400/30 bg-black/40 aspect-[16/9] block text-left transition-all hover:border-amber-400/60 hover:shadow-[0_0_20px_rgba(245,158,11,0.2)]"
+                          >
+                            <img
+                              src={post.image}
+                              alt={post.title}
+                              className="w-full h-full object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
+                              loading="lazy"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-90 group-hover/img:opacity-95 transition-opacity flex items-end p-2.5 justify-between">
+                              <span className="text-[11px] font-semibold text-amber-200 flex items-center gap-1.5 font-mono">
+                                <Maximize2 size={12} className="text-amber-400" /> Read Newspaper Clipping
+                              </span>
+                              <span className="text-[10px] px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-400/30 font-mono">
+                                ఈనాడు Print
+                              </span>
+                            </div>
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
 
@@ -138,15 +192,26 @@ export default function Blog() {
                   <div className="pt-6 space-y-4">
                     <div className="h-px bg-white/[0.06]" />
                     <div className="flex items-center justify-between text-xs pt-1">
-                      <a
-                        href={post.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 font-bold text-cyan-400 hover:text-cyan-300 transition-colors group/link"
-                      >
-                        <span>{post.type.includes("Registry") ? "View Registry" : "Read Full Coverage"}</span>
-                        <ExternalLink size={13} className="group-hover/link:translate-x-0.5 transition-transform" />
-                      </a>
+                      {post.image ? (
+                        <button
+                          type="button"
+                          onClick={() => setActiveImage({ src: post.image!, title: post.title })}
+                          className="inline-flex items-center gap-1.5 font-bold text-amber-400 hover:text-amber-300 transition-colors group/link cursor-pointer"
+                        >
+                          <span>View Newspaper Clip</span>
+                          <Maximize2 size={13} className="group-hover/link:scale-110 transition-transform" />
+                        </button>
+                      ) : (
+                        <a
+                          href={post.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 font-bold text-cyan-400 hover:text-cyan-300 transition-colors group/link"
+                        >
+                          <span>{post.type.includes("Registry") ? "View Registry" : "Read Full Coverage"}</span>
+                          <ExternalLink size={13} className="group-hover/link:translate-x-0.5 transition-transform" />
+                        </a>
+                      )}
                     </div>
                   </div>
                 </GlowCard>
@@ -155,6 +220,53 @@ export default function Blog() {
           })}
         </div>
       </div>
+
+      {/* Lightbox / Modal for Newspaper Clipping */}
+      <AnimatePresence>
+        {activeImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActiveImage(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-4xl w-full max-h-[90vh] bg-[#09152e] border border-amber-400/40 rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(245,158,11,0.25)] flex flex-col"
+            >
+              {/* Modal Header */}
+              <div className="flex items-center justify-between p-4 border-b border-white/10 bg-[#060c1c]">
+                <div className="flex items-center gap-2">
+                  <Newspaper size={16} className="text-amber-400" />
+                  <h4 className="text-sm font-bold text-white tracking-tight line-clamp-1">
+                    {activeImage.title}
+                  </h4>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setActiveImage(null)}
+                  className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              {/* Modal Image */}
+              <div className="p-3 sm:p-4 overflow-auto flex items-center justify-center bg-black/50">
+                <img
+                  src={activeImage.src}
+                  alt={activeImage.title}
+                  className="max-h-[75vh] w-auto object-contain rounded-lg"
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
