@@ -184,12 +184,12 @@ export default function ProjectDetail() {
                     <div className="rounded-2xl overflow-hidden border border-amber-400/30 bg-black/40 relative shadow-[0_0_30px_rgba(245,158,11,0.12)]">
                       <img
                         src={project.awardImage}
-                        alt="National Award Ceremony — World Water Day Conclave"
+                        alt={project.awardTitle || "Award Ceremony"}
                         className="w-full h-auto object-cover max-h-[360px]"
                       />
                       <div className="p-3 bg-gradient-to-t from-black/90 to-black/40 flex items-center justify-between text-xs font-mono text-amber-200">
-                        <span>🏆 World Water Day Conclave Award Ceremony</span>
-                        <span className="text-slate-400">DAIC, New Delhi</span>
+                        <span>🏆 {project.awardTitle || "Award Ceremony"}</span>
+                        <span className="text-slate-400">{project.awardLocation || "New Delhi"}</span>
                       </div>
                     </div>
                   </div>

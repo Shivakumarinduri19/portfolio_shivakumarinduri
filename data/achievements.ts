@@ -14,9 +14,29 @@ export interface Achievement {
   link?: string;
   linkText?: string;
   image?: string;
+  imageCaption?: string;
+  badgeText?: string;
 }
 
 export const achievements: Achievement[] = [
+  {
+    id: "acrs-2026-gold",
+    title: "Gold Prize — ISRS WebCon / I-CON Award",
+    subtitle: "47th Asian Conference on Remote Sensing (ACRS 2026)",
+    organization: "ISRS, ISG, AARS & Nakagawa Lab (Shibaura Institute of Technology, Japan)",
+    date: "2026",
+    type: "Award",
+    description:
+      'Awarded the prestigious Gold Prize (Rs. 25,000 Cash Prize) at the 47th Asian Conference on Remote Sensing (ACRS 2026) in New Delhi for "CoolCity AI: A Scalable Open-Source GeoAI and WebGIS Architecture for Monitoring and Mitigating Urban Heat Islands" by Shiva Kumar Induri (Jawaharlal Nehru Technological University, India). Presented by Prof. Chiharu Nakagawa and the ISRS / ISG committee.',
+    icon: "Trophy",
+    color: "cyan",
+    highlight: true,
+    link: "http://www.db.shibaura-it.ac.jp/~nakagawa/webcon/",
+    linkText: "WebCon Official Contest",
+    image: "/images/acrs-2026-gold-prize.jpg",
+    imageCaption: "ACRS 2026 Gold Prize Ceremony",
+    badgeText: "Gold Prize (₹25k)",
+  },
   {
     id: "1",
     title: "National Space Day 2026 — Research Poster Presentation",

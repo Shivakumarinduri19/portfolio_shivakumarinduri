@@ -31,6 +31,18 @@ const experience = [
     ],
   },
   {
+    role: "Lead GeoAI Developer — CoolCity AI",
+    organization: "JNTUH Project Lab",
+    location: "Hyderabad & New Delhi, India",
+    period: "2024 – 2026",
+    badge: "Gold Prize",
+    description: [
+      "Architected CoolCity AI, an open-source GeoAI and WebGIS framework for monitoring and mitigating Urban Heat Islands (UHI).",
+      "Awarded Gold Prize (Rs. 25,000) at the 47th Asian Conference on Remote Sensing (ACRS 2026) in New Delhi in the ISRS I-CON / WebCon contest.",
+      "Engineered automated GEE processing pipelines leveraging Landsat 8/9 TIRS thermal radiance, NDVI, and NDBI spatial correlations.",
+    ],
+  },
+  {
     role: "Technical Trainee (Winter Internship)",
     organization: "India Space Lab",
     location: "India",

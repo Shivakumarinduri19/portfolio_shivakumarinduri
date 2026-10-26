@@ -52,7 +52,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
             {isAwardWinner && (
               <span className="inline-flex items-center gap-1 text-[10px] font-bold text-amber-300 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full">
                 <Trophy size={11} className="text-amber-400" />
-                1st Prize
+                {project.awardTitle?.toLowerCase().includes("gold") ? "Gold Prize" : "1st Prize"}
               </span>
             )}
           </div>

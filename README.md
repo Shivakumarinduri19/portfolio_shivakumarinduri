@@ -41,9 +41,9 @@ A premium, open-source personal portfolio website designed for Geoinformatics st
 ├── data/                 # Content layer (easily update projects / credentials here)
 │   ├── profile.ts        # General profile bio, experience, and contact
 │   ├── projects.ts       # 3 detailed projects metadata
-│   ├── hackathons.ts     # 2 competition entries details
+│   ├── hackathons.ts     # 3 competition entries details
 │   ├── certificates.ts   # 5 certification logs
-│   ├── achievements.ts   # 5 awards and milestones
+│   ├── achievements.ts   # 8 awards and milestones
 │   └── skills.ts         # Technical skills taxonomy
 ├── lib/                  # Helper utilities (Tailwind class merger, formatters)
 └── public/               # Static assets (images, PDF resume, PWA manifest)

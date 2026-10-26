@@ -22,6 +22,16 @@ interface PostItem {
 
 const allPosts: PostItem[] = [
   {
+    title: "జేఎన్‌టీయూ విద్యార్థులకు స్వర్ణపథకం — ‘కూల్ సిటీ ఏఐ’ (ACRS 2026)",
+    source: "Eenadu (ఈనాడు) — Hyderabad Edition",
+    excerpt: "Prominently featured in Eenadu print edition (Page 9): Reports how JNTUH B.Tech Geoinformatics final year students Shiva Kumar Induri and M. Akhil Kumar won the 1st Place Gold Prize (₹25,000 cash award) at the 47th Asian Conference on Remote Sensing (ACRS 2026) in New Delhi for their innovation project ‘CoolCity AI’ in the ISRS I-CON contest.",
+    date: "October 19, 2026",
+    category: "Print Press",
+    link: "https://epaper.eenadu.net",
+    color: "amber",
+    image: "/images/eenadu-coolcity-acrs-press.jpg",
+  },
+  {
     title: "UN Mappers Humanitarian Mapping Sessions at JNTU Hyderabad — Special Mention",
     source: "United Nations (UN Maps / UN Mappers)",
     excerpt: "Featured and given a Special Mention in UN Maps global news for playing a vital role in organizing humanitarian mapping sessions at JNTU Hyderabad and developing Hydro Harvest AI to calculate rooftop rainwater harvesting using satellite data & AI.",

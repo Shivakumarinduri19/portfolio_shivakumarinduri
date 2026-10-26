@@ -23,6 +23,8 @@ export interface Project {
   objectives?: string[];
   period: string;
   awardImage?: string;
+  awardTitle?: string;
+  awardLocation?: string;
 }
 
 export const projects: Project[] = [
@@ -45,6 +47,8 @@ By integrating 30-year historical rainfall datasets and soil permeability layers
     featured: true,
     image: "/images/projects/hydroharvest.jpg",
     awardImage: "/images/jalshakti-award-ceremony.png",
+    awardTitle: "World Water Day Conclave Award Ceremony",
+    awardLocation: "DAIC, New Delhi",
     githubUrl: "https://github.com/Shivakumarinduri19/hydroharvest-ai",
     location: { lat: 17.385, lng: 78.4867, label: "Hyderabad, JNTUH" },
     datasets: [
@@ -68,21 +72,24 @@ By integrating 30-year historical rainfall datasets and soil permeability layers
   {
     id: "2",
     slug: "urban-heat-island",
-    title: "Urban Heat Island Spatio-Temporal Analysis",
-    subtitle: "Landsat-based Surface Urban Heat Island Intensity Assessment",
+    title: "CoolCity AI: Urban Heat Island GeoAI & WebGIS",
+    subtitle: "A Scalable Open-Source GeoAI and WebGIS Architecture for Monitoring and Mitigating Urban Heat Islands",
     description:
-      "Processed Landsat 8/9 TIRS data in GEE to quantify surface urban heat island (SUHI) intensity across the Hyderabad metropolitan region.",
-    longDescription: `This project implements a spatio-temporal analysis of the Surface Urban Heat Island (SUHI) intensity across the Hyderabad metropolitan region using Landsat 8/9 OLI-TIRS thermal data.
+      "Award-winning GeoAI and WebGIS architecture processing Landsat 8/9 TIRS and Sentinel data in Google Earth Engine to monitor, analyze, and mitigate surface urban heat island (SUHI) intensity.",
+    longDescription: `CoolCity AI is an award-winning, open-source GeoAI and WebGIS architecture designed to monitor, analyze, and mitigate surface urban heat island (SUHI) intensity across expanding metropolitan regions.
 
-The processing pipeline was built in Google Earth Engine (GEE). A spatial buffer algorithm was developed to analyze the exact correlation between urban density (NDBI), vegetation index (NDVI), and land surface temperature (LST) thermal retention.
+Secured the Gold Prize (Rs. 25,000 Cash Prize) at the 47th Asian Conference on Remote Sensing (ACRS 2026) in New Delhi in the ISRS I-CON / WebCon contest organized by the Indian Society of Remote Sensing, Indian Society of Geomatics, and Prof. Chiharu Nakagawa Lab (Shibaura Institute of Technology, Japan).
 
-The analysis confirmed a strong negative correlation between NDVI and LST, providing a validated, data-driven spatial model for targeted urban cooling interventions and microclimate landscaping.`,
+The processing engine is built on Google Earth Engine (GEE), integrating Landsat 8/9 OLI-TIRS thermal data with Sentinel-2 multispectral imagery. A custom spatial buffer algorithm models the statistical correlation between urban density (NDBI), vegetation index (NDVI), and land surface temperature (LST) thermal retention to generate actionable spatial intervention plans for urban planners.`,
     category: "Urban Analytics",
-    tags: ["GEE", "Landsat 8/9", "NDVI", "NDBI", "LST", "SUHI", "Spatial Buffer"],
-    techStack: ["Google Earth Engine", "JavaScript", "Landsat TIRS", "GIS Analysis"],
+    tags: ["GEE", "Landsat 8/9", "GeoAI", "WebGIS", "SUHI", "LST", "ACRS 2026 Gold Prize Winner"],
+    techStack: ["Google Earth Engine", "JavaScript", "Python", "Landsat TIRS", "GeoAI", "WebGIS"],
     status: "Completed",
     featured: true,
     image: "/images/projects/coolcity.jpg",
+    awardImage: "/images/acrs-2026-gold-prize.jpg",
+    awardTitle: "ACRS 2026 Gold Prize Ceremony — ISRS WebCon / I-CON",
+    awardLocation: "New Delhi, India",
     demoUrl: "https://ee-shivakumarinduri19.projects.earthengine.app/view/uhi",
     location: { lat: 17.385, lng: 78.4867, label: "Hyderabad, Telangana" },
     datasets: [
@@ -94,13 +101,15 @@ The analysis confirmed a strong negative correlation between NDVI and LST, provi
       "Quantify surface urban heat island (SUHI) intensity using Landsat thermal bands in GEE",
       "Analyze the correlation between NDBI (urban density), NDVI (vegetation), and LST (thermal retention)",
       "Establish spatial buffer algorithms to map heat retention relative to urban build layouts",
+      "Deploy open-source GeoAI & WebGIS dashboards for microclimate mitigation decision-support",
     ],
     results: [
+      "Awarded Gold Prize (Rs. 25,000) at the 47th Asian Conference on Remote Sensing (ACRS 2026) in the ISRS I-CON / WebCon Contest",
       "Produced multi-temporal LST heat mapping of the Hyderabad metropolitan region",
       "Confirmed statistically strong negative correlation between NDVI and LST",
       "Designed data-driven guidelines for urban greening cooling zones",
     ],
-    period: "2024",
+    period: "2024 – 2026",
   },
   {
     id: "3",

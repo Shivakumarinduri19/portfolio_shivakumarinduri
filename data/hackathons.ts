@@ -69,4 +69,29 @@ export const hackathons: Hackathon[] = [
     badge: "🏆",
     image: "/images/campuscircle-award-ceremony.png",
   },
+  {
+    id: "3",
+    title: "CoolCity AI",
+    event: "ISRS I-CON / WebCon Contest (47th ACRS 2026)",
+    organizer: "Indian Society of Remote Sensing (ISRS), ISG & Nakagawa Lab (Japan)",
+    date: "2026-10",
+    year: 2026,
+    teamSize: 2,
+    myRole: "Lead GeoAI & WebGIS Developer",
+    problemStatement:
+      "Design and deploy an open-source GeoAI and WebGIS architecture to quantify surface urban heat islands (SUHI) and model mitigation strategies using earth observation.",
+    solution:
+      "Architected CoolCity AI using Google Earth Engine, Landsat 8/9 thermal radiance, and Sentinel-2 multispectral indices with spatial buffer algorithms for real-time microclimate analytics.",
+    techStack: ["Google Earth Engine", "Python", "JavaScript", "GeoAI", "Landsat TIRS", "WebGIS"],
+    outcome: "Winner",
+    achievement: "🏆 Gold Prize (Rs. 25,000 Cash Prize)",
+    description:
+      "Awarded the Gold Prize at the 47th Asian Conference on Remote Sensing (ACRS 2026) in New Delhi in the ISRS I-CON / WebCon contest for pioneering open-source GeoAI & WebGIS innovation.",
+    color: "cyan",
+    badge: "🏆",
+    linkedProject: "urban-heat-island",
+    projectUrl: "http://www.db.shibaura-it.ac.jp/~nakagawa/webcon/",
+    image: "/images/acrs-2026-gold-prize.jpg",
+  },
 ];
+

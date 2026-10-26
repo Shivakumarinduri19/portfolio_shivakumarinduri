@@ -119,6 +119,8 @@ export default function Hackathons() {
                           className={`w-full group/img relative rounded-xl overflow-hidden border bg-black/40 aspect-[16/9] block text-left transition-all ${
                             h.color === "emerald"
                               ? "border-emerald-400/20 hover:border-emerald-400/50 hover:shadow-[0_0_25px_rgba(16,185,129,0.15)]"
+                              : h.color === "cyan"
+                              ? "border-cyan-400/20 hover:border-cyan-400/50 hover:shadow-[0_0_25px_rgba(0,240,255,0.15)]"
                               : "border-amber-400/20 hover:border-amber-400/50 hover:shadow-[0_0_25px_rgba(245,158,11,0.15)]"
                           }`}
                         >
@@ -130,15 +132,21 @@ export default function Hackathons() {
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-90 group-hover/img:opacity-95 transition-opacity flex items-end p-3 justify-between">
                             <span className="text-[11px] font-semibold text-slate-200 flex items-center gap-1.5 font-mono">
-                              <Maximize2 size={12} className={h.color === "emerald" ? "text-emerald-400" : "text-amber-400"} />
-                              {h.id === "2" ? "TGPCB Eco Champions Award Ceremony" : "World Water Day Conclave Award Ceremony"}
+                              <Maximize2 size={12} className={h.color === "emerald" ? "text-emerald-400" : h.color === "cyan" ? "text-cyan-400" : "text-amber-400"} />
+                              {h.id === "3"
+                                ? "ACRS 2026 Gold Prize Ceremony"
+                                : h.id === "2"
+                                ? "TGPCB Eco Champions Award Ceremony"
+                                : "World Water Day Conclave Award Ceremony"}
                             </span>
                             <span className={`text-[10px] px-2 py-0.5 rounded-md font-mono border ${
                               h.color === "emerald"
                                 ? "bg-emerald-500/20 text-emerald-300 border-emerald-400/30"
+                                : h.color === "cyan"
+                                ? "bg-cyan-500/20 text-cyan-300 border-cyan-400/30"
                                 : "bg-amber-500/20 text-amber-300 border-amber-400/30"
                             }`}>
-                              {h.id === "2" ? "1st Prize" : "New Delhi"}
+                              {h.id === "3" ? "Gold Prize" : h.id === "2" ? "1st Prize" : "New Delhi"}
                             </span>
                           </div>
                         </button>

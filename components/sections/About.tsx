@@ -34,8 +34,8 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; className?: s
 };
 
 const stats = [
-  { value: "₹1,00,000", label: "Grant Awarded", icon: Trophy, color: "text-amber-400" },
-  { value: "2x", label: "Hackathon Winner", icon: Award, color: "text-cyan-400" },
+  { value: "₹1,25,000+", label: "Grants & Prizes", icon: Trophy, color: "text-amber-400" },
+  { value: "3x", label: "Award Winner", icon: Award, color: "text-cyan-400" },
   { value: "8+", label: "GeoAI Projects", icon: Globe2, color: "text-emerald-400" },
   { value: "8.53", label: "B.Tech CGPA", icon: GraduationCap, color: "text-purple-400" },
 ];
